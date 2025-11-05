@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 function Authlayout() {
   return (
-    <div>
+    <div className='overflow-x-hidden'>
         <Outlet/>
     </div>
   )
