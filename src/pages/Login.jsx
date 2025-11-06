@@ -1,28 +1,51 @@
 
 import { Link } from 'react-router-dom'
 import Input from '../component/Input'
-import { Mail } from 'lucide-react'
+import { LockIcon, Mail } from 'lucide-react'
 
 import Navbar from '../component/Navbar'
+import { useState } from 'react'
 
 
 function Login() {
+
+  const [email, setemail] = useState(null)
+  const [password, setpassword] = useState(null)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(email, password + "hi there")
+    setemail("")
+    setpassword("")
+  }
+
+
   return (
     <div className='bg-black w-screen h-screen font-[Alan Sans]' >
-      <Navbar 
-      navigateto={'Signup'} 
+      <Navbar
+        navigateto={'Signup'}
       />
-      
+
       <div className='flex justify-center gap-2 items-center '>
         <div className=' text-white flex flex-col gap-3'>
-          <form className='flex flex-col gap-3 '>
+          <form onSubmit={handleSubmit} className='flex flex-col gap-3 '>
 
             <h1 className='  font-semibold p-3 text text-center pt-25 text-5xl pb-4.5'>Log in to Raun</h1>
             <Input
               Icon={Mail}
               type={"email"}
+              value={email}
               id={"email"}
               placeholder={"Email Address"}
+              onChange={(e) => setemail(e.target.value)}
+            />
+            <Input
+              Icon={LockIcon}
+              type={"password"}
+              value={password}
+              id={"password"}
+              placeholder={"Password"}
+              onChange={(e) => setpassword(e.target.value)}
             />
             <button className='bg-white rounded-2xl hover:bg-[#dad4d4ec] text-black  font-medium p-5 text-xl'> Continue with Email</button>
             <hr className='m-2.5 border-0 h-px bg-[#1f1f1f]' />
