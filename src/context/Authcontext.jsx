@@ -18,6 +18,9 @@ export const AuthProvider = ({ children }) => {
     const [isloading, setisloading] = useState(false);
     const [error, seterror] = useState(null)
 
+    const [profiledata , setprofiledata] = useState(null) 
+
+
 
     const login = async (email, password) => {
 
@@ -32,8 +35,9 @@ export const AuthProvider = ({ children }) => {
 
                 setaccesstoken(usertoken);
                 setisloading(false);
+                localStorage.setItem("user", JSON.stringify(User))
                 setuser(User)
-                return true
+                return true;
 
             }
 
@@ -53,11 +57,13 @@ export const AuthProvider = ({ children }) => {
 
     }
 
+
    const kitelogin = async()=>{
     const response = await api.get("/pro/kitelogin")
     console.log(response)
     window.location.href = response.data.url
    }
+
 
     const signup = async (username, zerodhausername, email, password,) => {
         setisloading(true);
@@ -94,10 +100,17 @@ export const AuthProvider = ({ children }) => {
 
     }
 
+  const getProfile = async ()=>{
+   const response =  await api.get("/pro/profile");
+   console.log(response.data)
+      setprofiledata(response.data);
+  }
+
     return (
         <AuthContext.Provider
             value={{
                 user,
+                setuser,
                 accesstoken,
                 isloading,
                 error,
@@ -105,6 +118,8 @@ export const AuthProvider = ({ children }) => {
                 signup,
                 logout,
                 kitelogin,
+                profiledata,
+                getProfile,
             }}
         >
             {children}

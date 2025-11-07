@@ -6,7 +6,10 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 
 function ProtectedRoutes() {
-    const { user } = useContext(AuthContext)
+    const { user ,setuser } = useContext(AuthContext)
+    const peruser = localStorage.getItem("user")
+    if(!user && peruser) return setuser(peruser)
+
     return (
         <>
             {user ? <Outlet /> : <Navigate to={"/login"} />}
