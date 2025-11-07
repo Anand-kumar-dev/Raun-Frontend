@@ -7,13 +7,16 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import ProtectedRoutes from './ProtectedRoutes';
 import Dashboard from '../pages/Dashboard';
+import KiteCallback from '../pages/Callback';
 
 export const router = createBrowserRouter([
   {
     element: <Authlayout />,
     children: [
       { path: "/login", element: <Login /> },
-      { path: "/signup", element: <Signup /> }
+      { path: "/signup", element: <Signup /> },
+      { path: "/callback", element: <KiteCallback /> },
+
     ]},
    { element: <ProtectedRoutes />,
     children: [

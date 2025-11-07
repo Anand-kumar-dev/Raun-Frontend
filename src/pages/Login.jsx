@@ -24,7 +24,6 @@ function Login() {
    if(success) {
      kitelogin()
    }
-// navigate("/dashboard", { replace: true });
     setemail("")
     setpassword("")
   }

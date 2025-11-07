@@ -1,9 +1,11 @@
-import { useContext } from "react"
+import { use, useContext, useState } from "react"
 import { AuthContext } from "../context/Authcontext"
 
 function Dashboard() {
 
-    const { user ,logout } = useContext(AuthContext)
+    const { user ,logout } = useContext(AuthContext);
+
+    const [profile , setprofile] = useState("")
    
 const handleClick = async(e)=>{
     e.preventDefault();

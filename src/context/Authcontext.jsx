@@ -54,8 +54,9 @@ export const AuthProvider = ({ children }) => {
     }
 
    const kitelogin = async()=>{
-    const redirectres = await api.get("/pro/kitelogin")
-    console.log(redirectres)
+    const response = await api.get("/pro/kitelogin")
+    console.log(response)
+    window.location.href = response.data.url
    }
 
     const signup = async (username, zerodhausername, email, password,) => {
