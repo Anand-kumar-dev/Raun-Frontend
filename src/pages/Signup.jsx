@@ -10,16 +10,16 @@ function Signup() {
 
   const { signup, isloading, error } = useContext(AuthContext)
 
-  const [username, setusername] = useState(null)
-  const [zerodhausername, setzerodhausername] = useState(null)
-  const [email, setemail] = useState(null)
-  const [password, setpassword] = useState(null)
+  const [username, setusername] = useState("")
+  const [zerodhausername, setzerodhausername] = useState("")
+  const [email, setemail] = useState("")
+  const [password, setpassword] = useState("")
+  const [succes , setsucces] = useState("")
 
-
-  const handleform = (e) => {
+  const handleform = async (e) => {
     e.preventDefault();
-    console.log(username, password, zerodhausername, email)
-    signup(username, password, zerodhausername, email);
+   const res = await signup(username,zerodhausername,email,password);
+    if(res) return setsucces(res);
     setemail("")
     setpassword("")
     setusername("")
@@ -84,7 +84,9 @@ function Signup() {
               <p className='p-1.2 text-red-500 text-center mt-2'>
                 {error} || something went wrong</p>}
 
-
+            {succes && 
+                <p className='text-green-500 text-center mt-2 p-1.2'>
+                  {succes}</p>}
 
 
           </form>

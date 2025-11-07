@@ -13,15 +13,14 @@ function Login() {
  const navigate = useNavigate();
   const { login, error, isloading } = useContext(AuthContext)
 
-  const [email, setemail] = useState(null)
-  const [password, setpassword] = useState(null)
+  const [email, setemail] = useState("")
+  const [password, setpassword] = useState("")
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
-    console.log(email, password + "hi there")
 
-   const success =  login(email, password)
+   const success = await login(email, password)
    if(success) navigate("/dashboard", { replace: true });
 
     setemail("")

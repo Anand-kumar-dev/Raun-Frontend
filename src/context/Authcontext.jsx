@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }) => {
 
         try {
             const response = await api.post("/api/auth/login", { email, password });
-            console.log(response)
             const User = response.data.mes
             const usertoken = response.data.accesstoken
             if (usertoken) {
@@ -55,18 +54,20 @@ export const AuthProvider = ({ children }) => {
 
 
 
-    const signup = async (username, email, password, zerodhausername) => {
+    const signup = async (username, zerodhausername,email, password, ) => {
         setisloading(true);
         seterror(null);
 
         try {
             const response = await api.post("/api/auth/signup", {
                 username,
-                email,
                 zerodhausername,
+                email,
                 password
             });
+             const mes = response.data.mes
             setisloading(false)
+            return mes;
 
         } catch (error) {
             seterror(error)
