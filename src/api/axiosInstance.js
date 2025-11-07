@@ -2,8 +2,8 @@
  
  
  
- export const axios = axios.create({
-  baseURL: 'https://some-domain.com/api/',
-  timeout: 1000,
+ export const api = axios.create({
+  baseURL: 'http://localhost:3000',
+  timeout: 5000,
   headers: {'X-Custom-Header': 'foobar'}
 });

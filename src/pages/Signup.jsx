@@ -42,7 +42,7 @@ function Signup() {
               type={'text'}
               id={'username'}
               Icon={User}
-              Placeholder={'Username'}
+              placeholder={'Username'}
               onChange={(e) => setusername(e.target.value)}
               value={username}
             />
@@ -50,7 +50,7 @@ function Signup() {
               type={'text'}
               id={'zerousername'}
               Icon={ShieldUser}
-              Placeholder={'Zerodha username'}
+              placeholder={'Zerodha username'}
               onChange={(e) => setzerodhausername(e.target.value)}
               value={zerodhausername}
             />
@@ -58,7 +58,7 @@ function Signup() {
               type={'email'}
               id={'email'}
               Icon={Mail}
-              Placeholder={'Email Address'}
+              placeholder={'Email Address'}
               onChange={(e) => setemail(e.target.value)}
               value={email}
             />
@@ -66,7 +66,7 @@ function Signup() {
               type={'password'}
               id={'Password'}
               Icon={Lock}
-              Placeholder={'Password'}
+              placeholder={'Password'}
               onChange={(e) => setpassword(e.target.value)}
               value={password}
             />

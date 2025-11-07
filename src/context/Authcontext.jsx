@@ -1,19 +1,21 @@
-import axios from "axios";
+
 import { createContext, useState } from "react";
 
-
-
+import { api } from "../api/axiosInstance";
 
 
 
 
 export const AuthContext = createContext();
 
+
 export const AuthProvider = ({ children }) => {
+    
+   
 
     const [user, setuser] = useState(null);
     const [accesstoken, setaccesstoken] = useState(null);
-    const [isloading, setisloading] = useState(true);
+    const [isloading, setisloading] = useState(false);
     const [error, seterror] = useState(null)
 
 
@@ -23,21 +25,26 @@ export const AuthProvider = ({ children }) => {
         seterror(null);
 
         try {
-            const response = await axios.post("/api/login", { email, password });
-
-            const data = response.data
-            if (data.accesstoken) {
-                setaccesstoken(data.accesstoken);
+            const response = await api.post("/api/auth/login", { email, password });
+            console.log(response)
+            const User = response.data.mes
+            const usertoken = response.data.accesstoken
+            if (usertoken) {
+                setaccesstoken(usertoken);
                 setisloading(false);
-                setuser(data.user)
+                setuser(User)
+                return true
+
             }
 
 
         } catch (error) {
 
             setisloading(false)
-            seterror(error)
-
+            seterror(error.response?.data?.message || error.message);
+            console.log(error)
+            return false
+            
         } finally {
 
             setisloading(false)
@@ -53,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         seterror(null);
 
         try {
-            const response = await axios.post("", {
+            const response = await api.post("/api/auth/signup", {
                 username,
                 email,
                 zerodhausername,
@@ -73,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
 
         try {
-            await axios.get("/api/auth/logout");
+            await api.get("/api/auth/logout");
             setuser(null)
         } catch (error) {
             seterror(error)
@@ -81,19 +88,19 @@ export const AuthProvider = ({ children }) => {
 
     }
 
- return (
-    <AuthContext.Provider
-      value={{
-        user,
-        accesstoken,
-        isloading,
-        error,
-        login,
-        signup,
-        logout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider
+            value={{
+                user,
+                accesstoken,
+                isloading,
+                error,
+                login,
+                signup,
+                logout,
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
+    );
 }

@@ -5,15 +5,20 @@ import Authlayout from '../layout/Authlayout';
 
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
+import ProtectedRoutes from './ProtectedRoutes';
+import Dashboard from '../pages/Dashboard';
 
 export const router = createBrowserRouter([
-    {
-      path:"/",
-      element:<Authlayout/>,
-      children:[
-        { path:"/login", element: <Login />},
-        { path:"/signup", element: <Signup />}
-        ]
-    }
+  {
+    element: <Authlayout />,
+    children: [
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <Signup /> }
+    ]},
+   { element: <ProtectedRoutes />,
+    children: [
+      { path: "/dashboard", element: <Dashboard /> }
+    ]
+  }
 ]);
 
