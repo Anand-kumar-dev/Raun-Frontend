@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
  const navigate = useNavigate();
-  const { login, error, isloading } = useContext(AuthContext)
+  const { login, error, isloading ,kitelogin } = useContext(AuthContext)
 
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
@@ -21,8 +21,10 @@ function Login() {
     e.preventDefault()
 
    const success = await login(email, password)
-   if(success) navigate("/dashboard", { replace: true });
-
+   if(success) {
+     kitelogin()
+   }
+// navigate("/dashboard", { replace: true });
     setemail("")
     setpassword("")
   }

@@ -10,8 +10,8 @@ export const AuthContext = createContext();
 
 
 export const AuthProvider = ({ children }) => {
-    
-   
+
+
 
     const [user, setuser] = useState(null);
     const [accesstoken, setaccesstoken] = useState(null);
@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
             const User = response.data.mes
             const usertoken = response.data.accesstoken
             if (usertoken) {
+
                 setaccesstoken(usertoken);
                 setisloading(false);
                 setuser(User)
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
             seterror(error.response?.data?.message || error.message);
             console.log(error)
             return false
-            
+
         } finally {
 
             setisloading(false)
@@ -52,9 +53,12 @@ export const AuthProvider = ({ children }) => {
 
     }
 
+   const kitelogin = async()=>{
+    const redirectres = await api.get("/pro/kitelogin")
+    console.log(redirectres)
+   }
 
-
-    const signup = async (username, zerodhausername,email, password, ) => {
+    const signup = async (username, zerodhausername, email, password,) => {
         setisloading(true);
         seterror(null);
 
@@ -65,7 +69,7 @@ export const AuthProvider = ({ children }) => {
                 email,
                 password
             });
-             const mes = response.data.mes
+            const mes = response.data.mes
             setisloading(false)
             return mes;
 
@@ -99,6 +103,7 @@ export const AuthProvider = ({ children }) => {
                 login,
                 signup,
                 logout,
+                kitelogin,
             }}
         >
             {children}
