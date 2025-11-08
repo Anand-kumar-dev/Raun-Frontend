@@ -11,19 +11,24 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
  const navigate = useNavigate();
-  const { login, error, isloading ,kitelogin } = useContext(AuthContext)
+  const { login, isloading ,kitelogin } = useContext(AuthContext)
 
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
+  const [error , seterror] = useState("")
 
 
   const handleSubmit = async(e) => {
     e.preventDefault()
 
-   const success = await login(email, password)
-   if(success) {
-     kitelogin()
-   }
+  try {
+     const success = await login(email, password)
+     if(success) {
+       kitelogin()
+     }
+  } catch (error) {
+     seterror(error.response?.data?.message || error.message)
+  }
     setemail("")
     setpassword("")
   }

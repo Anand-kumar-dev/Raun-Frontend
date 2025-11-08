@@ -8,18 +8,24 @@ import { AuthContext } from '../context/Authcontext'
 
 function Signup() {
 
-  const { signup, isloading, error } = useContext(AuthContext)
+  const { signup, isloading  } = useContext(AuthContext)
 
   const [username, setusername] = useState("")
   const [zerodhausername, setzerodhausername] = useState("")
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
   const [succes , setsucces] = useState("")
+  const [error , seterror] = useState("")
+
 
   const handleform = async (e) => {
     e.preventDefault();
-   const res = await signup(username,zerodhausername,email,password);
-    if(res) return setsucces(res);
+try {
+     const res = await signup(username,zerodhausername,email,password);
+      if(res) return setsucces(res);
+} catch (error) {
+  seterror(error.response?.data?.message || error.message)
+}
     setemail("")
     setpassword("")
     setusername("")

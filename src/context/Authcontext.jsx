@@ -16,41 +16,34 @@ export const AuthProvider = ({ children }) => {
     const [user, setuser] = useState(null);
     const [accesstoken, setaccesstoken] = useState(null);
     const [isloading, setisloading] = useState(false);
-    const [error, seterror] = useState(null)
 
-    const [profiledata , setprofiledata] = useState(null) 
+    const [profiledata, setprofiledata] = useState(null)
 
 
 
     const login = async (email, password) => {
-
         setisloading(true);
-        seterror(null);
-
+        
         try {
             const response = await api.post("/api/auth/login", { email, password });
             const User = response.data.mes
             const usertoken = response.data.accesstoken
-            if (usertoken) {
 
+            if (usertoken) {
                 setaccesstoken(usertoken);
                 setisloading(false);
                 localStorage.setItem("user", JSON.stringify(User))
                 setuser(User)
                 return true;
-
             }
-
 
         } catch (error) {
 
             setisloading(false)
-            seterror(error.response?.data?.message || error.message);
             console.log(error)
-            return false
+            return error
 
         } finally {
-
             setisloading(false)
         }
 
@@ -58,11 +51,13 @@ export const AuthProvider = ({ children }) => {
     }
 
 
-   const kitelogin = async()=>{
-    const response = await api.get("/pro/kitelogin")
-    console.log(response)
-    window.location.href = response.data.url
-   }
+
+
+    const kitelogin = async () => {
+        const response = await api.get("/pro/kitelogin")
+        console.log(response)
+        window.location.href = response.data.url
+    }
 
 
     const signup = async (username, zerodhausername, email, password,) => {
@@ -94,17 +89,18 @@ export const AuthProvider = ({ children }) => {
         try {
             await api.get("/api/auth/logout");
             setuser(null)
+            localStorage.removeItem("user");
         } catch (error) {
             seterror(error)
         }
 
     }
 
-  const getProfile = async ()=>{
-   const response =  await api.get("/pro/profile");
-   console.log(response.data)
-      setprofiledata(response.data);
-  }
+    const getProfile = async () => {
+        const response = await api.get("/pro/profile");
+        console.log(response.data)
+        setprofiledata(response.data);
+    }
 
     return (
         <AuthContext.Provider
@@ -113,7 +109,6 @@ export const AuthProvider = ({ children }) => {
                 setuser,
                 accesstoken,
                 isloading,
-                error,
                 login,
                 signup,
                 logout,
