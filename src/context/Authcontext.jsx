@@ -18,7 +18,9 @@ export const AuthProvider = ({ children }) => {
     const [isloading, setisloading] = useState(false);
 
     const [profiledata, setprofiledata] = useState(null)
-
+    const [holdingsdata, setholdingsdata] = useState(null); // New State
+    const [positionsdata, setpositionsdata] = useState(null); // New State
+    const [fundsdata, setfundsdata] = useState(null); // New State
 
 
     const login = async (email, password) => {
@@ -102,6 +104,43 @@ export const AuthProvider = ({ children }) => {
         setprofiledata(response.data);
     }
 
+    const getHoldings = async () => {
+        try {
+            const response = await api.get("/pro/holdings");
+            console.log("Holdings Data:", response.data);
+            setholdingsdata(response.data);
+        } catch (error) {
+            console.error("Error fetching holdings:", error);
+            setholdingsdata({ error: error.message });
+        }
+    }
+    
+
+    const getPositions = async () => {
+        try {
+            const response = await api.get("/pro/positions");
+            console.log("Positions Data:", response.data);
+            setpositionsdata(response.data);
+        } catch (error) {
+            console.error("Error fetching positions:", error);
+            setpositionsdata({ error: error.message });
+        }
+    }
+    
+
+    const getFunds = async () => {
+        try {
+            const response = await api.get("/pro/funds");
+            console.log("Funds Data:", response.data);
+            setfundsdata(response.data);
+        } catch (error) {
+            console.error("Error fetching funds:", error);
+            setfundsdata({ error: error.message });
+        }
+    }
+
+
+
     return (
         <AuthContext.Provider
             value={{
@@ -112,9 +151,16 @@ export const AuthProvider = ({ children }) => {
                 login,
                 signup,
                 logout,
+                
                 kitelogin,
                 profiledata,
                 getProfile,
+                holdingsdata,
+                getHoldings,
+                positionsdata,
+                getPositions,
+                fundsdata,
+                getFunds
             }}
         >
             {children}

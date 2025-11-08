@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/Authcontext';
 
 
-const Navbar = ({ navigateto, islogout, profile }) => {
+const Navbar = ({ navigateto, islogout, profiledata }) => {
 
-    const { user, logout, getProfile, profiledata } = useContext(AuthContext);
+
+    
+    const { user, logout, getProfile,  } = useContext(AuthContext);
 
 
     const handlelogout = async (e) => {
@@ -21,7 +23,7 @@ const Navbar = ({ navigateto, islogout, profile }) => {
                         <h1 className='tracking-widest text-2xl hover:underline'>RAUN</h1>
                     </li>
                     <li>
-                        <h1 className='tracking-widest text-blue-400 text-2xl hover:underline'>{profile}</h1>
+                        <h1 className='tracking-widest text-blue-400 text-2xl hover:underline'>{profiledata}</h1>
                     </li>
                     <li>
                         {navigateto ? <Link to={"/" + navigateto} className='bg-[#1f1f1f] text-lg px-4 border border-white p-2 rounded-xl hover:bg-amber-300' >
