@@ -17,6 +17,8 @@ function Dashboard() {
         fundsdata
     } = useContext(AuthContext);
 
+ 
+     
     useEffect(() => {
         const fetchProfile = async () => {
             await getProfile();
@@ -53,7 +55,7 @@ function Dashboard() {
             <div className="bg-black text-white ">
                 <Navbar
                     profile={"profile"}
-                    logout={true}
+                    islogout={false}
                     profiledata={profiledata ? profiledata.user_id : null}
                 />
                 {profiledata ? (
@@ -180,7 +182,7 @@ function Dashboard() {
                                             <h3 className="text-lg font-semibold mb-3 text-[#60f7d4]">
                                                 Available
                                             </h3>
-                                            {Object.entries(fundsdata.available).map(([key, value]) => (
+                                            {Object.entries(fundsdata.available)?.map(([key, value]) => (
                                                 <div key={key} className="flex justify-between text-sm mb-1 text-gray-300">
                                                     <span className="capitalize">{key.replace(/_/g, " ")}</span>
                                                     <span className="text-white">₹{value ?? 0}</span>

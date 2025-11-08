@@ -1,18 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/Authcontext';
+import { toast } from 'sonner';
 
 
 const Navbar = ({ navigateto, islogout, profiledata }) => {
 
 
-    
-    const { user, logout, getProfile,  } = useContext(AuthContext);
 
+    const { user, logout, getProfile, setaccesstoken  } = useContext(AuthContext);
+    const [error , seterror] = useState("")
 
     const handlelogout = async (e) => {
-        e.preventDefault();
-        await logout()
+      try {
+          e.preventDefault();
+          await logout()
+          setaccesstoken(null)
+      } catch (error) {
+        toast.error(error)
+        seterror(error)
+      }
     };
 
     return (
@@ -33,6 +40,7 @@ const Navbar = ({ navigateto, islogout, profiledata }) => {
                                 logout</button>}
                     </li>
                 </ul>
+                {error ? <p className='text-white text-2xl'>error</p> : null}
             </nav>
         </>
     )

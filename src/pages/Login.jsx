@@ -8,6 +8,7 @@ import { useContext, useState } from 'react'
 import Navbar from '../component/Navbar'
 import { AuthContext } from '../context/Authcontext'
 import { useNavigate } from "react-router-dom";
+import { toast } from 'sonner'
 
 function Login() {
  const navigate = useNavigate();
@@ -24,6 +25,7 @@ function Login() {
   try {
      const success = await login(email, password)
      if(success) {
+      toast.success("Logged in successfully!");
        kitelogin()
      }
   } catch (error) {

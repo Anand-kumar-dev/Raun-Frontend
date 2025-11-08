@@ -91,9 +91,9 @@ export const AuthProvider = ({ children }) => {
         try {
             await api.get("/api/auth/logout");
             setuser(null)
-            localStorage.removeItem("user");
+             localStorage.removeItem("user");
         } catch (error) {
-            seterror(error)
+            return error
         }
 
     }
@@ -151,7 +151,7 @@ export const AuthProvider = ({ children }) => {
                 login,
                 signup,
                 logout,
-                
+
                 kitelogin,
                 profiledata,
                 getProfile,

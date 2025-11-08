@@ -4,6 +4,7 @@ import { Loader, Lock, Mail, ShieldUser, User } from 'lucide-react'
 import Navbar from '../component/Navbar'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../context/Authcontext'
+import { toast } from 'sonner'
 
 
 function Signup() {
@@ -22,7 +23,9 @@ function Signup() {
     e.preventDefault();
 try {
      const res = await signup(username,zerodhausername,email,password);
-      if(res) return setsucces(res);
+      if(res){ 
+        toast("signup successfull")
+        return setsucces(res);}
 } catch (error) {
   seterror(error.response?.data?.message || error.message)
 }
