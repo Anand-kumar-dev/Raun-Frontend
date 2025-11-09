@@ -28,22 +28,25 @@ export const AuthProvider = ({ children }) => {
         
         try {
             const response = await api.post("/api/auth/login", { email, password });
+            console.log(response)
             const User = response.data.mes
             const usertoken = response.data.accesstoken
 
-            if (usertoken) {
+            if (usertoken ) {
                 setaccesstoken(usertoken);
                 setisloading(false);
                 localStorage.setItem("user", JSON.stringify(User))
                 setuser(User)
                 return true;
+            }else{
+                return false
             }
 
         } catch (error) {
 
             setisloading(false)
-            console.log(error)
-            return error
+            console.log("error in logini in"+error)
+            return false
 
         } finally {
             setisloading(false)

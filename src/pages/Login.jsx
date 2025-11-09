@@ -24,12 +24,17 @@ function Login() {
 
   try {
      const success = await login(email, password)
-     if(success) {
+     console.log(success)
+     if(success) {   
       toast.success("Logged in successfully!");
        kitelogin()
+     }else{
+           throw error
      }
   } catch (error) {
+    console.log(error)
      seterror(error.response?.data?.message || error.message)
+     toast.error(error)
   }
     setemail("")
     setpassword("")
