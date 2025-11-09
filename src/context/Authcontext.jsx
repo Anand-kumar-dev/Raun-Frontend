@@ -139,7 +139,15 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+   const zerout = async () =>{
+    try {
+      const response=  await api.get("/pro/zerout")
+      console.log("this is from zeroout"+response)
 
+    } catch (error) {
+        return error
+    };
+   }
 
     return (
         <AuthContext.Provider
@@ -160,7 +168,8 @@ export const AuthProvider = ({ children }) => {
                 positionsdata,
                 getPositions,
                 fundsdata,
-                getFunds
+                getFunds,
+                zerout
             }}
         >
             {children}

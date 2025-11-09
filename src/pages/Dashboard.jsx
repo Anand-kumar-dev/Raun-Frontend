@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/Authcontext"
 import Navbar from '../component/Navbar'
+import { toast } from "sonner";
 
 function Dashboard() {
 
@@ -14,11 +15,21 @@ function Dashboard() {
         getPositions,
         positionsdata,
         getFunds,
-        fundsdata
+        fundsdata,
+        zerout
     } = useContext(AuthContext);
 
- 
-     
+  
+    const handledisconnect = async (e)=>{
+       e.preventDefault();
+      try {
+        await  zerout()
+      } catch (error) {
+        toast(error)
+      }
+
+    }
+
     useEffect(() => {
         const fetchProfile = async () => {
             await getProfile();
@@ -60,8 +71,9 @@ function Dashboard() {
                 />
                 {profiledata ? (
                     <div className="flex flex-col pl-5 pt-5">
-                        <div className="text-2xl text-white border-b-2 border-gray-800 p-3">
-                            Hi , {profiledata.user_shortname}
+                        <div className=" flex justify-between border-b-2 items-center border-gray-800">
+                            <div className="text-2xl text-white    p-3">Hi , {profiledata.user_shortname}</div>
+                            <div><button onClick={handledisconnect} className="p-3 text-2xl border-2 mb-2 rounded-xl bg-gray-950">Disconnect</button></div>
                         </div>
 
                         <div className="p-5">
