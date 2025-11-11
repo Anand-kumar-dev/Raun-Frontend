@@ -30,16 +30,16 @@ The entire application state, especially for user authentication and trading dat
 
 ##  Tech Stack
 
-* **Frontend Library:** React (using functional components and Hooks)
+* **Frontend Library:** React 
 * **Build Tool:** Vite
-* **Styling:** Tailwind CSS (for rapid utility-first development)
+* **Styling:** Tailwind CSS 
 * **Routing:** `react-router-dom`
 * **API Client:** `axios` configured for requests to `http://localhost:3000` with credentials.
 
 ##  Local Development
 
 1.  **Ensure the Backend is Running:**
-    The frontend is configured to communicate with the backend running at `http://localhost:3000`. Make sure you have the [Raun Backend](#raun-backend---the-engine-room) set up and running first.
+    The frontend is configured to communicate with the backend running at `http://localhost:3000`. Make sure you have the [Raun Backend](#raun-backend) set up and running first.
 
 2.  **Clone the repository:**
     ```bash
@@ -59,6 +59,7 @@ The entire application state, especially for user authentication and trading dat
     npm run dev
     ```
     The app should now be available at `http://localhost:5173`.
+
 
 
 
