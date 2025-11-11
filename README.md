@@ -1,5 +1,7 @@
 
 # Raun Frontend - Trading Dashboard
+<img width="1364" height="629" alt="image" src="https://github.com/user-attachments/assets/aa4251ef-6abe-4c79-9df6-a3b0c440f1b6" />
+
 
 This is the user-facing application for Raun, a modern trading dashboard built using React and styled with Tailwind CSS. It connects to the custom Node.js backend to provide an authenticated, single-page experience for viewing key trading data from Zerodha Kite.
 
@@ -47,4 +49,5 @@ The entire application state, especially for user authentication and trading dat
     npm run dev
     ```
     The app should now be available at `http://localhost:5173`.
+
 
