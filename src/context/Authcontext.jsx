@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setuser] = useState(null);
     const [accesstoken, setaccesstoken] = useState(null);
     const [isloading, setisloading] = useState(false);
-
+    const [error , seterror] = useState(null)
     const [profiledata, setprofiledata] = useState(null)
     const [holdingsdata, setholdingsdata] = useState(null); // New State
     const [positionsdata, setpositionsdata] = useState(null); // New State
